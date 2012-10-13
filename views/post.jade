@@ -1,0 +1,12 @@
+#post-page
+  .container
+    #post-form
+      form#the-form.form-horizontal(onsubmit='return false;')
+        .control-group
+          .control-label Bericht
+          .controls: textarea.span8#message(rows=5, placeholder='Jouw berichtje')
+        .control-group
+          .control-label.caption Van
+          .controls: input#from.span8(type='text', placeholder='Jouw naam')
+        .controls
+          input#postMessage.btn.btn-primary.span4(type='submit', value='Plaatsen')
