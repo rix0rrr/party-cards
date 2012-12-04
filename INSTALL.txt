@@ -1,0 +1,7 @@
+Not all dependencies can be installed from the standard npm repository. So go like this:
+
+    git clone https://github.com/aguidrevitch/jquery-file-upload-middleware.git
+    npm install ./jquery-file-upload-middleware
+    rm -rf jquery-file-upload-middleware
+
+    npm install
