@@ -57,5 +57,5 @@ io.sockets.on('connection', form.listenToSocket);
 //  START
 //--------------------------------------------------------------------------------------
 
-server.listen(3003);
+server.listen(3000);
 console.log("Express server listening on port %d in %s mode", server.address().port, app.settings.env);
