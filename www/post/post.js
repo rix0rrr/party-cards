@@ -4,9 +4,13 @@ $(function() {
     function CardForm() {
         var self = this;
 
-        self.message = ko.observable('');
-        self.from    = ko.observable('');
-        self.picture = ko.observable('');
+        self.cardStyles = ko.observable([]);
+        self.cardStyle  = ko.observable('');
+
+        self.message   = ko.observable('');
+        self.from      = ko.observable('');
+        self.picture   = ko.observable('');
+        self.cardtype  = ko.observable('');
         self.uploading = ko.observable(false);
 
         self.doPost = function() {
@@ -15,7 +19,8 @@ $(function() {
             socket.emit('formcard', {
                 from: self.from(),
                 message: self.message(),
-                picture: self.picture()
+                picture: self.picture(),
+                cardtype: self.cardStyle().klass
             });
 
             $('#post-form').hide("drop", { direction: "up" }, 500, function() {
@@ -33,10 +38,19 @@ $(function() {
         self.postCaption = ko.computed(function() {
             return self.uploading() ? 'Uploaden...' : 'Sturen';
         });
+
+        self.selectCardStyle = function(cardStyle) {
+            console.log("Cardstyle becomes", cardStyle);
+            self.cardStyle(cardStyle);
+        }
     }
 
-    var card = new CardForm();
-    ko.applyBindings(card);
+    var model = new CardForm();
+    ko.applyBindings(model);
+    Postcards.getCardStyles(function(data) {
+        model.cardStyles(data);
+        model.cardStyle(data[0]);
+    });
 
     // Make the file upload button active (submit immediately, put URL in viewmodel when done)
     $(function () {
@@ -44,11 +58,11 @@ $(function() {
             dataType: 'json',
             add: function (e, upload) {
                 upload.submit();
-                card.uploading(true);
+                model.uploading(true);
             },
             done: function (e, upload) {
-                card.uploading(false);
-                card.picture(upload.result[0].url);
+                model.uploading(false);
+                model.picture(upload.result[0].url);
             }
         });
     });

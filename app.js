@@ -47,9 +47,9 @@ var form = new (require('./sources/form-post')).FormPost(app, __dirname + '/www/
     heap.add(heap.uniqueId(), true, {
         from: post.from,
         message: post.message,
-        picture: post.picture
+        picture: post.picture,
+        cardtype: post.cardtype
     });
-    // FIXME: cardtype
 });
 io.sockets.on('connection', form.listenToSocket);
 

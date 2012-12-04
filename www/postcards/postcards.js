@@ -10,9 +10,7 @@
     };
 })(jQuery);
 
-var cards = {
-}
-
+// Normally distributed random variable centerd around 0 with unit deviation
 Math.nrand = function() {
 	var x1, x2, rad;
  
@@ -53,6 +51,35 @@ function traceSize(element, viewport) {
 var visibleTimeSec = 10;
 var disappearTimeSec = 15; // Must be at least the time specified in the 'disappear' class
 
+// FIXME: Actual thumbnails
+var cardStyles = [
+    { klass: 'card1',
+      preview: '/postcards/card1.jpg' },
+    { klass: 'card2',
+      preview: '/postcards/card2.jpg' },
+    { klass: 'card3',
+      preview: '/postcards/card3.png' },
+    { klass: 'card4',
+      preview: '/postcards/card4.jpg' },
+    { klass: 'card5',
+      preview: '/postcards/card5.png' },
+    { klass: 'card6',
+      preview: '/postcards/card6.jpg' },
+    { klass: 'card7',
+      preview: '/postcards/card7.jpg' },
+    { klass: 'card8',
+      preview: '/postcards/card8.jpg' }
+];
+
+Postcards = {
+    getCardStyles: function(callback) {
+        callback(cardStyles);
+    }
+};
+
+/**
+ * Surface class, for dropping postcards
+ */
 function Surface(element) {
     var self = this;
 
