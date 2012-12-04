@@ -1,0 +1,42 @@
+body {
+  background: lightblue;
+  padding: 100px;
+}
+
+#post-form {
+  background: white;
+  border-radius: 10px;
+  padding: 30px;
+}
+
+#post-form, #post-form input, #post-form textarea {
+  font-family: Georgia;
+  font-size: 18pt;
+  line-height: 1.5em;
+}
+
+#post-form #from {
+  height: 1.5em;
+}
+
+.post {
+  background: white;
+  border-radius: 10px;
+  padding: 20px;
+  font-family: Georgia;
+  font-size: 16pt;
+  line-height: 1.5em;
+  width: 20em;
+  border: solid 1px black;
+  box-shadow: 10px 10px 20px #000;
+}
+
+.from {
+  text-align: right;
+  position: relative;
+}
+
+.picture-preview {
+    max-width: 100px;
+    max-height: 100px;
+}

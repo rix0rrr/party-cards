@@ -1,0 +1,12 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.surface {
+    background: black;
+    position: relative;
+    width: 100%;
+    height: 1000px;
+    overflow: hidden;
+}

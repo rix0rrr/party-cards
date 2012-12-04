@@ -1,0 +1,43 @@
+.postcard {
+    background: white;
+    padding: 20px;
+}
+
+.postcard .picture {
+    max-width: 100%;
+    max-height: 300px;
+    margin: 0 auto;
+}
+.postcard .sender { text-align: right; }
+.postcard {
+    font-size: 18pt;
+    -webkit-transform: rotate(-10deg) scale(1.3);
+    opacity: 0;
+    box-shadow: 0px 3px 10px #000;
+    font-smoothing: always;
+}
+
+@-webkit-keyframes shrink10 { from { -webkit-scale: 1.3; } to { -webkit-scale: 1.0; } }
+@-webkit-keyframes shrink11 { from { -webkit-scale: 1.3; } to { -webkit-scale: 1.1; } }
+@-webkit-keyframes shrink12 { from { -webkit-scale: 1.3; } to { -webkit-scale: 1.2; } }
+
+.disappear {
+    opacity: 0 !important;
+    -webkit-filter: grayscale(1.0);
+    -webkit-transition: opacity 15s, -webkit-filter 10s !important;
+}
+
+.postcard {
+    background-size: 100%;
+    text-shadow: 1px 1px 2px #000000;
+    min-height: 200px;
+}
+
+.card1 { background-image: url(card1.jpg); color: white;  padding-right: 200px; }
+.card2 { background-image: url(card2.jpg); color: white;  padding-left: 200px; }
+.card3 { background-image: url(card3.png); color: white;  }
+.card4 { background-image: url(card4.jpg); color: yellow; }
+.card5 { background-image: url(card5.png); color: black; text-shadow: 1px 1px 2px white; }
+.card6 { background-image: url(card6.jpg); color: yellow;  }
+.card7 { background-image: url(card7.jpg); color: white;  }
+.card8 { background-image: url(card8.jpg); color: yellow; }

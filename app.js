@@ -1,57 +1,61 @@
+var express = require('express');
 
-/**
- * Module dependencies.
- */
+// Roundabout initialization of Socket.IO, required for express 3.0
+var app    = express()
+    http   = require('http'),
+    server = http.createServer(app),
+    io     = require('socket.io').listen(server);
 
-var express = require('express')
-  , routes = require('./routes')
+app.use(express.errorHandler({ dumpExceptions: true, showStack: true })); 
 
-var app = module.exports = express.createServer();
+app.get('/', function(req, res) {
+    res.send('<html><body><ul><li><a href="/view/view.html">View board</a></li><li><a href="/post/post.html">Send card</a></ul>');
+});
+app.use(express.static('www'));
 
-var io = require('socket.io').listen(app);
-
-// Configuration
-
-app.configure(function(){
-  app.set('views', __dirname + '/views');
-  app.set('view engine', 'jade');
-  app.use(express.bodyParser());
-  app.use(express.methodOverride());
-  app.use(app.router);
-  app.use(express.static(__dirname + '/public'));
+//--------------------------------------------------------------------------------------
+//  CARD SINK
+//--------------------------------------------------------------------------------------
+var heap = new (require('./cardheap')).CardHeap({
+    persist: 'messages.json'
+}).on('card', function(card) {
+    io.sockets.emit('card', card);
 });
 
-app.configure('development', function(){
-  app.use(express.errorHandler({ dumpExceptions: true, showStack: true })); 
+heap.start();
+
+//--------------------------------------------------------------------------------------
+//  CARD SOURCES
+//--------------------------------------------------------------------------------------
+
+//--------------------------------------------------------------------------------------
+//  Twitter
+var twitter = new (require('./sources/twitter')).TwitterSearch('felienne via.me', {
+    viaMeApiKey: 'akpxttag5zbbyob5syjc3ntxs'
+}).on('tweet', function(tweet) {
+    heap.add(tweet.id, tweet.fresh, {
+        from: tweet.from_user,
+        message: tweet.text,
+        picture: tweet.picture
+    });
+}).start();
+
+//--------------------------------------------------------------------------------------
+//  New card posted via the web form
+var form = new (require('./sources/form-post')).FormPost(app, __dirname + '/www/uploads', '/uploads')
+.on('formcard', function(post) {
+    heap.add(heap.uniqueId(), true, {
+        from: post.from,
+        message: post.message,
+        picture: post.picture
+    });
+    // FIXME: cardtype
 });
+io.sockets.on('connection', form.listenToSocket);
 
-app.configure('production', function(){
-  app.use(express.errorHandler()); 
-});
+//--------------------------------------------------------------------------------------
+//  START
+//--------------------------------------------------------------------------------------
 
-// Routes
-app.get('/',      routes.index);
-app.get('/post',  routes.post);
-app.get('/view',  routes.view);
-
-var all_posts = [];
-
-// Socket I/O 
-io.sockets.on('connection', function(socket) {
-  // Send all old messages
-  all_posts.forEach(function(message) {
-    socket.emit('oldpost', message);
-  });
-  
-  /**
-   * Whenever a post comes in, add it to the log and broadcast to all connected clients
-   */
-  socket.on('newpost', function(post) {
-    post.when = Date.now();
-    all_posts.push(post);
-    io.sockets.emit('newpost', post);
-  });
-});
-
-app.listen(3000);
-console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
+server.listen(3003);
+console.log("Express server listening on port %d in %s mode", server.address().port, app.settings.env);
