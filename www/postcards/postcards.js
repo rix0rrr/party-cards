@@ -71,7 +71,7 @@ var cssBlock = function(klass, props) {
 
 Postcards = {
     randomStyle: function() {
-        return cardStyles[Math.floor(Math.random() * cardStyles.length)].klass;
+        return cardStyles[1 + Math.floor(Math.random() * cardStyles.length - 1)].klass;
     },
 
     getCardStyles: function(callback) {
