@@ -6,6 +6,8 @@
  * This module basically spawns a new postcard every time a message comes in over the Socket.IO link
  */
 $(function() {
+    Postcards.generateCSS();
+
     // Surface always fills the entire screen
     var s = new Surface($('.surface'));
     traceSize($('.surface'), $(window));

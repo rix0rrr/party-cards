@@ -1,15 +1,14 @@
 <!doctype html>
 <html>
     <head>
+        <meta name="viewport" content="width=800,user-scalable=no">
+
         <!-- Base libraries -->
         <script src="/jquery/jquery.min.js"></script>
         <script src="/jquery/jquery-ui-1.9.2.custom.min.js"></script>
         <script src="/socket.io/socket.io.js"></script>
         <script src="/knockoutjs/knockout-2.2.0.js"></script>
-
-        <!-- Bootstrap -->
-        <script src="/bootstrap/js/bootstrap.min.js"></script>
-        <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+        <script src="/underscore/underscore-min.js"></script>
 
         <!-- Postcards module -->
         <script src="/postcards/postcards.js"></script>
@@ -34,44 +33,31 @@
         <title>Kaartje sturen</title>
     </head>
     <body>
-        <div class="container">
-            <div id="post-form">
-                <div data-bind="foreach: cardStyles" style="overflow: auto;">
-                    <div class="style-preview" data-bind="css: { active: $parent.cardStyle() == $data }"><a href="#" data-bind="click: $parent.selectCardStyle"><img data-bind="attr: { src: preview }"></a></div>
-                </div>
-                <form id="the-form" class="form-horizontal" data-bind="submit: doPost">
-                    <div id="card-form" data-bind="attr: { class: cardStyle().klass }">
-                        <div class="control-group">
-                            <div class="control-label">Bericht</div>
-                            <div class="controls">
-                                <textarea id="message" class="span8" rows="5" placeholder="Jouw berichtje" data-bind="value: message"></textarea>
-                            </div>
-                        </div>
+        <div id="post-form">
+            <div data-bind="foreach: cardStyles" style="overflow: auto;">
+                <div class="style-preview" data-bind="css: { active: $parent.cardStyle() == $data }, visible: image"><a href="#" data-bind="click: $parent.selectCardStyle"><img data-bind="attr: { src: image }"></a></div>
+            </div>
+            <form id="the-form" class="form-horizontal" data-bind="submit: doPost">
+                <div data-bind="attr: { class: 'postcard ' + cardStyle().klass }">
+                    <textarea id="message" class="message" rows="5" placeholder="Jouw berichtje" data-bind="value: message, valueUpdate: 'afterkeydown', css: { 'needs-filling': !message() }"></textarea>
+                    <input type="text" id="from" class="from" rows="5" placeholder="Jouw naam" data-bind="value: from, valueUpdate: 'afterkeydown', css: { 'needs-filling': !from() }"></input>
 
-                        <div class="control-group">
-                            <div class="control-label">Van</div>
-                            <div class="controls">
-                                <input type="text" id="from" class="span8" rows="5" placeholder="Jouw naam" data-bind="value: from"></input>
-                            </div>
-                        </div>
-
-                        <div class="control-group">
-                            <div class="controls">
-                                <span class="btn btn-success fileinput-button">
-                                    <i class="icon-camera icon-white"></i>
-                                    <span>Foto toevoegen</span>
-                                    <input id="fileupload" type="file" name="picture" data-url="/upload">
-                                </span><br>
-                                <img class="picture-preview" data-bind="attr: { src: picture }, visible: picture">
-                            </div>
+                    <div class="picture no-picture-for-you" data-bind="visible: !uploadAvailable()">
+                        Sorry, your browser does not allow photo uploads.
+                    </div>
+                    <div id="picture" class="picture" data-bind="css: { 'needs-filling': !picture() }, visible: uploadAvailable">
+                        <img class="picture-preview" data-bind="attr: { src: picture }, visible: picture">
+                        <div class="picture-button fileinput-button">
+                            <span>Foto toevoegen</span>
+                            <input id="fileupload" type="file" name="picture" data-url="/upload">
                         </div>
                     </div>
+                </div>
 
-                    <center>
-                        <input type="submit" class="span6 btn btn-primary btn-large" value="Sturen" data-bind="enable: canPost, attr: { value: postCaption }">
-                    </center>
-                </form>
-            </div>
+                <center>
+                    <input type="submit" value="Sturen" class="submit-btn" data-bind="enable: canPost, attr: { value: postCaption }">
+                </center>
+            </form>
         </div>
     </body>
 </html>

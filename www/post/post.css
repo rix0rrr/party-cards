@@ -1,57 +1,84 @@
 body {
   background: lightblue;
-  padding: 100px;
+  padding: 30px;
 }
 
-#card-form {
+/************** GENERAL LAYOUT STYLES **********************/
+
+.postcard, .postcard input, .postcard textarea {
+  font-size: 18pt;
+  font-family: Georgia;
+}
+
+#post-form {
+    margin: 0 auto;
+    width: 800px;
+}
+
+.postcard {
   border-radius: 10px;
-  padding: 30px;
   margin-bottom: 10px;
   box-shadow: 0px 3px 6px #000;
+
+  width: 700px;
+  height: 400px;
 }
 
-#post-form, #post-form input, #post-form textarea {
-  font-family: Georgia;
-  font-size: 18pt;
-  line-height: 1.5em;
-}
-
-#card-form #from {
-  height: 1.5em;
-}
-
-.post {
-  background: white;
-  border-radius: 10px;
-  padding: 20px;
-  font-family: Georgia;
-  font-size: 16pt;
-  line-height: 1.5em;
-  width: 20em;
-  border: solid 1px black;
-  box-shadow: 10px 10px 20px #000;
-}
-
-.from {
-  text-align: right;
-  position: relative;
-}
-
-.picture-preview {
-    max-width: 100px;
-    max-height: 100px;
-}
+/************** STYLE PICKER **********************/
 
 .style-preview {
     float: left;
     margin-right: 10px;
     margin-bottom: 10px;
-    border: solid 2px black;
 }
     
-.style-preview.active { border-color: yellow; }
-
 .style-preview img {
     width: 60px;
     height: 60px;
+    border: solid 2px black;
 }
+
+.style-preview.active img { border-color: yellow; }
+
+/************** INPUT CONTROLS **********************/
+
+.picture-button {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-top: -30px;
+    margin-left: -3.5em;
+    background-color: #555;
+    color: grey;
+    border-radius: 8px;
+    padding: 0px 5px;
+}
+
+/* Reset input styles */
+.postcard .message, .postcard .from {
+    background-color: transparent;
+    border: 0px;
+    color: inherit;
+}
+
+/* Nice placeholder decoration for empty fields */
+.needs-filling { 
+    border: dashed 3px #EEE !important;
+    border-radius: 10px;
+}
+
+.no-picture-for-you {
+    text-align: center;
+    size: 10px;
+    margin-top: 100px;
+    color: #888;
+}
+
+/************** FINALLY THE BIG BUTTON **********************/
+
+.submit-btn {
+    width: 500px;
+    padding: 10px;
+    font-size: 18pt;
+}
+

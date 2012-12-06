@@ -28,17 +28,21 @@ heap.start();
 //  CARD SOURCES
 //--------------------------------------------------------------------------------------
 
+var cards = require('./www/postcards/postcards');
+
 //--------------------------------------------------------------------------------------
 //  Twitter
-var twitter = new (require('./sources/twitter')).TwitterSearch('felienne via.me', {
+var twitter = new (require('./sources/twitter')).TwitterSearch('#cool', {
     viaMeApiKey: 'akpxttag5zbbyob5syjc3ntxs'
 }).on('tweet', function(tweet) {
     heap.add(tweet.id, tweet.fresh, {
         from: tweet.from_user,
         message: tweet.text,
-        picture: tweet.picture
+        picture: tweet.picture,
+        cardtype: cards.Postcards.randomStyle()
     });
 }).start();
+
 
 //--------------------------------------------------------------------------------------
 //  New card posted via the web form

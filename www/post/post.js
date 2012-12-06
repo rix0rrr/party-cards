@@ -13,6 +13,8 @@ $(function() {
         self.cardtype  = ko.observable('');
         self.uploading = ko.observable(false);
 
+        self.uploadAvailable = ko.observable(true);
+
         self.doPost = function() {
             if (self.message() == '' || self.from() == '') return;
 
@@ -32,25 +34,25 @@ $(function() {
         };
 
         self.canPost = ko.computed(function() {
-            return !self.uploading();
+            return !self.uploading() && self.message() && self.from();
         });
 
         self.postCaption = ko.computed(function() {
             return self.uploading() ? 'Uploaden...' : 'Sturen';
         });
 
-        self.selectCardStyle = function(cardStyle) {
-            console.log("Cardstyle becomes", cardStyle);
-            self.cardStyle(cardStyle);
-        }
+        self.selectCardStyle = self.cardStyle;
     }
 
     var model = new CardForm();
     ko.applyBindings(model);
     Postcards.getCardStyles(function(data) {
         model.cardStyles(data);
-        model.cardStyle(data[0]);
+        model.cardStyle(_.find(data, function(x) { return x.image; }));
     });
+    Postcards.generateCSS();
+
+    model.uploadAvailable(!$('#fileupload').attr('disabled'));
 
     // Make the file upload button active (submit immediately, put URL in viewmodel when done)
     $(function () {
