@@ -37,7 +37,7 @@ module.exports = {
 
         var fetch = function() {
             request.get({ url: 'http://search.twitter.com/search.json' + nextQuery, json: true }, function(err, response, data) {
-                if (data) {
+                if (data && data.results) {
                     nextQuery = data.refresh_url;
 
                     data.results.forEach(function(tweet) {
