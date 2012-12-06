@@ -27,3 +27,16 @@ body {
     -webkit-transition: opacity 15s, -webkit-filter 10s !important;
 }
 
+.banner {
+    font-family: arial, sans-serif;
+    position: absolute;
+    top: 100%;
+    margin-top: -23px;
+    color: white;
+
+    width: 100%;
+    text-align: center;
+}
+
+.banner .emph { color: orange; }
+
