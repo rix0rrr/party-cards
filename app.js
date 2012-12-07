@@ -11,7 +11,9 @@ app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
 app.get('/', function(req, res) {
     res.send('<html><body><ul><li><a href="/view/view.html">View board</a></li><li><a href="/post/post.html">Send card</a></ul>');
 });
-app.use(express.static('www'));
+
+var oneDay = 24 * 60 * 60 * 1000;
+app.use(express.static('www', { maxAge: oneDay }));
 
 //--------------------------------------------------------------------------------------
 //  CARD SINK
