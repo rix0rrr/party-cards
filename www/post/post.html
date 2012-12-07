@@ -46,7 +46,7 @@
                     <input type="text" id="from" class="from" rows="5" placeholder="Jouw naam" data-bind="value: from, valueUpdate: 'afterkeydown', css: { 'needs-filling': !from() }"></input>
 
                     <div class="picture no-picture-for-you" data-bind="visible: !uploadAvailable()">
-                        Sorry, your browser does not allow photo uploads.
+                        Je browser ondersteunt helaas geen uploads.
                     </div>
                     <div id="picture" class="picture" data-bind="css: { 'needs-filling': !picture() }, visible: uploadAvailable">
                         <img class="picture-preview" data-bind="attr: { src: picture }, visible: picture">
