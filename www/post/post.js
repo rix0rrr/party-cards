@@ -12,6 +12,7 @@ $(function() {
         self.picture   = ko.observable('');
         self.cardtype  = ko.observable('');
         self.uploading = ko.observable(false);
+        self.progress  = ko.observable(0);
 
         self.uploadAvailable = ko.observable(true);
 
@@ -64,7 +65,16 @@ $(function() {
             },
             done: function (e, upload) {
                 model.uploading(false);
-                model.picture(upload.result[0].url);
+                model.picture(upload.result[0].mobile_url || upload.result[0].url);
+            },
+            progressInterval: 1,
+            progress: function (e, data) {
+                try {
+                    var frac = data.loaded / data.total;
+                    model.progress(Math.round(frac * 100));
+                } catch (e) {
+                    // Well that's too bad
+                }
             }
         });
     });

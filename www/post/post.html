@@ -2,7 +2,7 @@
 <html>
     <head>
         <!-- Mobile -->
-        <meta name="viewport" content="width=800,user-scalable=no">
+        <meta name="viewport" content="width=800,initial-scale=1,min-scale=1">
         <meta name="apple-mobile-web-app-capable" content="yes">
         <link rel="apple-touch-icon" href="apple-touch-icon.png" />
 
@@ -50,6 +50,7 @@
                     </div>
                     <div id="picture" class="picture" data-bind="css: { 'needs-filling': !picture() }, visible: uploadAvailable">
                         <img class="picture-preview" data-bind="attr: { src: picture }, visible: picture">
+                        <div class="progress-bar" data-bind="attr: { style: 'width: ' + progress() + '%' }, visible: uploading, text: progress() + '%'"></div>
                         <div class="picture-button fileinput-button">
                             <span>Foto toevoegen</span>
                             <input id="fileupload" type="file" name="picture" data-url="/upload">

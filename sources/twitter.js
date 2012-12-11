@@ -49,7 +49,7 @@ module.exports = {
 
                     fresh = false;
                 }
-                else console.log("Error retrieving twitter", err);
+                else console.log("Error retrieving twitter", err, response, data);
 
                 timer = setTimeout(fetch, options.refreshInterval);
             });

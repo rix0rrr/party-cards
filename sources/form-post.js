@@ -16,7 +16,13 @@ module.exports = {
         app.use('/upload', upload.fileHandler({
             uploadDir: dir,
             uploadUrl: uploadUrl,
-            tmpDir: tmpDir
+            tmpDir: tmpDir,
+            imageVersions: {
+                mobile: {
+                    width: 1000,
+                    height: 1000
+                }
+            }
         }));
 
         // Call this on every new Socket.IO socket to listen for cards on it

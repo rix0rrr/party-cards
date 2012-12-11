@@ -1,6 +1,6 @@
 body {
   background: lightblue;
-  padding: 30px;
+  padding: 5px 30px;
 }
 
 /************** GENERAL LAYOUT STYLES **********************/
@@ -17,7 +17,7 @@ body {
 
 .postcard {
   border-radius: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   box-shadow: 0px 3px 6px #000;
 
   width: 700px;
@@ -28,8 +28,8 @@ body {
 
 .style-preview {
     float: left;
-    margin-right: 10px;
-    margin-bottom: 10px;
+    margin-right: 5px;
+    margin-bottom: 5px;
 }
     
 .style-preview img {
@@ -82,3 +82,26 @@ body {
     font-size: 18pt;
 }
 
+.progress-bar {
+    position: absolute;
+    top: 50%;
+    left: 0px;
+    width: 100%;
+    margin-top: -15px;
+    height: 30px;
+    border: solid 1px black;
+
+    font-size: 10px;
+    color: white;
+    text-align: right;
+    overflow: hidden;
+
+    background: rgb(243,197,189); /* Old browsers */
+    background: -moz-linear-gradient(top,  rgba(243,197,189,1) 0%, rgba(232,108,87,1) 50%, rgba(234,40,3,1) 51%, rgba(255,102,0,1) 75%, rgba(199,34,0,1) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(243,197,189,1)), color-stop(50%,rgba(232,108,87,1)), color-stop(51%,rgba(234,40,3,1)), color-stop(75%,rgba(255,102,0,1)), color-stop(100%,rgba(199,34,0,1))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  rgba(243,197,189,1) 0%,rgba(232,108,87,1) 50%,rgba(234,40,3,1) 51%,rgba(255,102,0,1) 75%,rgba(199,34,0,1) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  rgba(243,197,189,1) 0%,rgba(232,108,87,1) 50%,rgba(234,40,3,1) 51%,rgba(255,102,0,1) 75%,rgba(199,34,0,1) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  rgba(243,197,189,1) 0%,rgba(232,108,87,1) 50%,rgba(234,40,3,1) 51%,rgba(255,102,0,1) 75%,rgba(199,34,0,1) 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  rgba(243,197,189,1) 0%,rgba(232,108,87,1) 50%,rgba(234,40,3,1) 51%,rgba(255,102,0,1) 75%,rgba(199,34,0,1) 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f3c5bd', endColorstr='#c72200',GradientType=0 ); /* IE6-9 */
+}
