@@ -67,7 +67,7 @@ $(function() {
                 model.uploading(false);
                 model.picture(upload.result[0].mobile_url || upload.result[0].url);
             },
-            progressInterval: 1,
+            progressInterval: 500,
             progress: function (e, data) {
                 try {
                     var frac = data.loaded / data.total;

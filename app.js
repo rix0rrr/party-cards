@@ -34,7 +34,7 @@ var cards = require('./www/postcards/postcards');
 
 //--------------------------------------------------------------------------------------
 //  Twitter
-var twitter = new (require('./sources/twitter')).TwitterSearch('#party', {
+var twitter = new (require('./sources/twitter')).TwitterSearch('#siouxkerst', {
     viaMeApiKey: 'akpxttag5zbbyob5syjc3ntxs'
 }).on('tweet', function(tweet) {
     heap.add(tweet.id, tweet.fresh, {
