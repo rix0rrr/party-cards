@@ -38,10 +38,10 @@
     <body>
         <div id="post-form">
             <div data-bind="foreach: cardStyles" style="overflow: auto;">
-                <div class="style-preview" data-bind="css: { active: $parent.cardStyle() == $data }, visible: image"><a href="#" data-bind="click: $parent.selectCardStyle"><img data-bind="attr: { src: image }"></a></div>
+                <div class="style-preview" data-bind="css: { active: $parent.cardStyle() == $data.klass }, visible: image"><a href="#" data-bind="click: $parent.selectCardStyle"><img data-bind="attr: { src: image }"></a></div>
             </div>
             <form id="the-form" class="form-horizontal" data-bind="submit: doPost">
-                <div data-bind="attr: { class: 'postcard ' + cardStyle().klass }">
+                <div data-bind="attr: { class: 'postcard ' + cardStyle() }">
                     <textarea id="message" class="message" rows="5" placeholder="Jouw berichtje" data-bind="value: message, valueUpdate: 'afterkeydown', css: { 'needs-filling': !message() }"></textarea>
                     <input type="text" id="from" class="from" rows="5" placeholder="Jouw naam" data-bind="value: from, valueUpdate: 'afterkeydown', css: { 'needs-filling': !from() }"></input>
 

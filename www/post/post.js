@@ -1,4 +1,21 @@
 $(function() {
+    function supports_html5_storage() {
+      try {
+        return 'localStorage' in window && window['localStorage'] !== null;
+      } catch (e) {
+        return false;
+      }
+    }
+
+    function persistLocally(name, observable) {
+        if (!supports_html5_storage()) return;
+
+        observable(window.localStorage.getItem(name));
+        observable.subscribe(function(newValue) {
+            window.localStorage.setItem(name, newValue);
+        });
+    }
+    
     var socket = io.connect('/');
 
     function CardForm() {
@@ -10,7 +27,6 @@ $(function() {
         self.message   = ko.observable('');
         self.from      = ko.observable('');
         self.picture   = ko.observable('');
-        self.cardtype  = ko.observable('');
         self.uploading = ko.observable(false);
         self.progress  = ko.observable(0);
 
@@ -23,7 +39,7 @@ $(function() {
                 from: self.from(),
                 message: self.message(),
                 picture: self.picture(),
-                cardtype: self.cardStyle().klass
+                cardtype: self.cardStyle()
             });
 
             $('#post-form').hide("drop", { direction: "up" }, 500, function() {
@@ -42,14 +58,22 @@ $(function() {
             return self.uploading() ? 'Uploaden...' : 'Sturen';
         });
 
-        self.selectCardStyle = self.cardStyle;
+        self.selectCardStyle = function(style) {
+            self.cardStyle(style.klass);
+        }
+
+        // Persist message/from/picture in localStorage if available
+        persistLocally('message', self.message);
+        persistLocally('from', self.from);
+        persistLocally('picture', self.picture);
+        persistLocally('cardStyle', self.cardStyle);
     }
 
     var model = new CardForm();
     ko.applyBindings(model);
     Postcards.getCardStyles(function(data) {
         model.cardStyles(data);
-        model.cardStyle(_.find(data, function(x) { return x.image; }));
+        if (!model.cardStyle()) model.cardStyle(_.find(data, function(x) { return x.image; }).klass);
     });
     Postcards.generateCSS();
 

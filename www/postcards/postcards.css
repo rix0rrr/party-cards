@@ -17,6 +17,10 @@
     overflow: hidden;
 }
 
+.postcard .picture {
+    text-align: center;
+}
+
 .postcard .picture img {
     margin: auto auto;
     max-width: 100%;

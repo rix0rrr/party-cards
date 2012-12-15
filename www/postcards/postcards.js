@@ -41,7 +41,6 @@ var disappearTimeSec = 15; // Must be at least the time specified in the 'disapp
 
 // FIXME: Actual thumbnails
 var cardStyles = [];
-var num_cards = 15;
 
 var cardStyles = [
     { klass: 'card0',  image: '',                      color: 'black',      shadow: 'white',  photo: 'right', size: 'narrow' },
@@ -60,7 +59,8 @@ var cardStyles = [
     { klass: 'card13', image: '/postcards/card13.jpg', color: 'white',      shadow: 'black',  photo: 'left' , size: 'narrow' },
     { klass: 'card14', image: '/postcards/card14.jpg', color: 'yellow',     shadow: 'black',  photo: 'right', size: 'wide' },
     { klass: 'card15', image: '/postcards/card15.jpg', color: 'orange',     shadow: 'black',  photo: 'left' , size: 'wide' },
-    { klass: 'card16', image: '/postcards/card16.jpg', color: 'black',      shadow: 'white',  photo: 'right', size: 'wide' }
+    { klass: 'card16', image: '/postcards/card16.jpg', color: 'black',      shadow: 'white',  photo: 'right', size: 'wide' },
+    { klass: 'card17', image: '/postcards/card17.jpg', color: 'cyan',     shadow: 'black',  photo: 'right', size: 'narrow' }
 ];
 
 var cssBlock = function(klass, props) {
